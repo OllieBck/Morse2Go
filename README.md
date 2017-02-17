@@ -11,4 +11,8 @@ Install Bower -- "npm install -g bower"
 
 Mor.js -- "bower install morjs"
 
-Include script from Responsive Voice.js in index.html -- "<script src="http://code.responsivevoice.org/responsivevoice.js"></script>"
+Include script from Responsive Voice.js in index.html
+
+Info on EZ-Link Bluetooth Device: https://learn.adafruit.com/introducing-bluefruit-ez-key-diy-bluetooth-hid-keyboard/overview
+
+Phone Gap offers Desktop App and Mobile App for testing: http://docs.phonegap.com/getting-started/1-install-phonegap/desktop/
