@@ -1,5 +1,5 @@
 function init(){
-  document.getElementById('submitText').addEventListener('click', function(){
+  document.getElementById('submitText').addEventListener('touchend', function(){
     var morseCode = document.getElementById('TextField').value;
     //console.log(morseCode);
     //console.log(morjs.decode(morseCode, {mode: 'simple'}));
@@ -9,15 +9,15 @@ function init(){
     document.getElementById('TextField').value = "";
   });
 
-  document.getElementById('dot').addEventListener('click', function(){
+  document.getElementById('dot').addEventListener('touchend', function(){
     var morseLetter = document.getElementById('TextField').value = document.getElementById('TextField').value + '.';
   });
 
-  document.getElementById('dash').addEventListener('click', function(){
+  document.getElementById('dash').addEventListener('touchend', function(){
     var morseLetter = document.getElementById('TextField').value = document.getElementById('TextField').value + '-';
   });
 
-  document.getElementById('space').addEventListener('click', function(){
+  document.getElementById('space').addEventListener('touchend', function(){
     var morseLetter = document.getElementById('TextField').value = document.getElementById('TextField').value + ' ';
   });
 

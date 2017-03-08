@@ -27,19 +27,30 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
-        this.receivedEvent('deviceready');
-    },
+      // var voicelist = responsiveVoice.getVoices();
+      // console.log(voicelist);
+      document.getElementById('submitText').addEventListener('touchend', function(){
+        var morseCode = document.getElementById('TextField').value;
+        //console.log(morseCode);
+        //console.log(morjs.decode(morseCode, {mode: 'simple'}));
+        document.getElementById('decode').innerHTML =" ";
+        var decodedText = morjs.decode(morseCode, {mode: 'simple'});
+        document.getElementById('decode').innerHTML = decodedText;
+        responsiveVoice.speak(decodedText, "US English Female");
+        document.getElementById('TextField').value = "";
+      });
 
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+      document.getElementById('dot').addEventListener('touchend', function(){
+        var morseLetter = document.getElementById('TextField').value = document.getElementById('TextField').value + '.';
+      });
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+      document.getElementById('dash').addEventListener('touchend', function(){
+        var morseLetter = document.getElementById('TextField').value = document.getElementById('TextField').value + '-';
+      });
 
-        console.log('Received Event: ' + id);
+      document.getElementById('space').addEventListener('touchend', function(){
+        var morseLetter = document.getElementById('TextField').value = document.getElementById('TextField').value + ' ';
+      });
     }
 };
 
