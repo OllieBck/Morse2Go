@@ -33,6 +33,22 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <icon height="180" src="res/ios/icon.png" width="180" />
+    <icon height="60" src="res/ios/icon.png" width="60" />
+    <icon height="120" src="res/ios/icon.png" width="120" />
+    <icon height="76" src="res/ios/icon.png" width="76" />
+    <icon height="152" src="res/ios/icon.png" width="152" />
+    <icon height="40" src="res/ios/icon.png" width="40" />
+    <icon height="80" src="res/ios/icon.png" width="80" />
+    <icon height="57" src="res/ios/icon.png" width="57" />
+    <icon height="114" src="res/ios/icon.png" width="114" />
+    <icon height="72" src="res/ios/icon.png" width="72" />
+    <icon height="144" src="res/ios/icon.png" width="144" />
+    <icon height="29" src="res/ios/icon.png" width="29" />
+    <icon height="58" src="res/ios/icon.png" width="58" />
+    <icon height="50" src="res/ios/icon.png" width="50" />
+    <icon height="100" src="res/ios/icon.png" width="100" />
+    <icon height="167" src="res/ios/icon.png" width="167" />
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
     <preference name="AllowInlineMediaPlayback" value="false" />
