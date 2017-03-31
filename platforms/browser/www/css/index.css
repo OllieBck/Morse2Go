@@ -84,7 +84,7 @@ h1 {
   border: none;
   margin: 1vw;
   margin-left: 2.5vw;
-  height: 12vh;
+  height: 10vh;
   width: 45vw;
   background-color: black;
   color: white;
@@ -96,7 +96,7 @@ h1 {
   border: none;
   margin: 1vw;
   margin-left: 2.5vw;
-  height: 12vh;
+  height: 10vh;
   width: 45vw;
   background-color: black;
   color: white;
@@ -105,24 +105,27 @@ h1 {
   line-height: 1vh;
 }
 
-.center {
-  margin: 0 auto;
-  display: inline-block;
+.center{
+  width: 100%;
 }
 
 .field{
-  margin: 0 auto;
+  margin: auto;
   font-size: 40px;
   height: 10vh;
-  width: 85%;
-  padding: 5px;
+  width: 80%;
   text-align: center;
+  display: block;
 }
 
+.buffer{
+  height:20vh;
+  width:100%;
+}
 
 .revealed{
-  margin: 5vw;
-  height: 10vh;
+  margin: 10px;
+  height: 50%;
   width: 90vw;
   font-size:40px;
   word-wrap: break-word;

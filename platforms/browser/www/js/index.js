@@ -35,7 +35,6 @@ var app = {
 
     morse2Go: function() {
       var decodedLetters = [];
-
       document.getElementById('submitText').addEventListener('touchend', function(){
         var decodedText = app.getMorse(decodedLetters);
         decodedLetters.push(decodedText);

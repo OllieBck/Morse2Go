@@ -9,6 +9,9 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "info.jasonbeck"
+        },
+        "cordova-plugin-keyboard": {
+            "PACKAGE_NAME": "info.jasonbeck"
         }
     },
     "dependent_plugins": {}
