@@ -19,6 +19,9 @@
 // var decodeField;
 // var decodedContent;
 
+var host = "192.168.1.58";
+var ws = new WebSocket('ws://' + host + ':9111');
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -39,7 +42,8 @@ var app = {
         var decodedText = app.getMorse(decodedLetters);
         decodedLetters.push(decodedText);
         var phraseToSpeak = app.compileWord(decodedLetters);
-        responsiveVoice.speak(phraseToSpeak, "US English Female");
+        responsiveVoice.speak(phraseToSpeak, "US English Male");
+        ws.send(phraseToSpeak);
         document.getElementById('TextField').value = "";
         decodedLetters.splice(0, decodedLetters.length);
       });
@@ -66,11 +70,15 @@ var app = {
         app.getMorse(decodedLetters);
       });
 
+      document.getElementById('sendText').addEventListener('touchend', function(){
+        alert("pressed");
+      });
+
     },
 
     compileWord: function(decodedLetters) {
       var assembledPhrase = decodedLetters.join("");
-      console.log(assembledPhrase);
+      //console.log(assembledPhrase);
       return assembledPhrase;
     },
 
