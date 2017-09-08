@@ -22,6 +22,8 @@
 var host = "192.168.1.58";
 var ws = new WebSocket('ws://' + host + ':9111');
 
+var counter = 0;
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -37,7 +39,10 @@ var app = {
     },
 
     morse2Go: function() {
+      app.focusElement();
+
       var decodedLetters = [];
+
       document.getElementById('submitText').addEventListener('touchend', function(){
         var decodedText = app.getMorse(decodedLetters);
         decodedLetters.push(decodedText);
@@ -48,8 +53,62 @@ var app = {
         decodedLetters.splice(0, decodedLetters.length);
       });
 
+      window.addEventListener("keydown", function(event){
+        if (event.defaultPrevented){
+          return;
+        }
+
+        if (event.key == "Enter"){
+          counter = counter + 1;
+        }
+      });
+
+      if (counter > 0 && counter <= 5) {
+        app.playShort();
+      }
+
+      window.addEventListener("keyup", function(event){
+        if (counter > 0 && counter <= 5){
+        var morseLetter = document.getElementById('TextField').value = document.getElementById('TextField').value + '.';
+        app.getMorse(decodedLetters);
+        counter = 0;
+      }
+
+        else if (counter > 5 && counter < 20){
+        var morseLetter = document.getElementById('TextField').value = document.getElementById('TextField').value + '-';
+        app.getMorse(decodedLetters);
+        counter = 0;
+        }
+
+        else {
+          counter = 0;
+        }
+
+      });
+
+/*
+      window.addEventListener("keydown", function(event){
+        if (event.defaultPrevented) {
+          return; // Do nothing if the event was already processed
+        }
+
+        switch (event.key) {
+          case "Enter":
+            counter = counter + 1;
+            if (counter > 0 || counter < 3){
+            var morseLetter = document.getElementById('TextField').value = document.getElementById('TextField').value + '.';
+            app.getMorse(decodedLetters);
+            counter = 0;
+          }
+            break;
+        }
+
+      });
+*/
+
       document.getElementById('dot').addEventListener('touchend', function(){
         var morseLetter = document.getElementById('TextField').value = document.getElementById('TextField').value + '.';
+        app.playShort();
         app.getMorse(decodedLetters);
       });
 
@@ -70,10 +129,15 @@ var app = {
         app.getMorse(decodedLetters);
       });
 
+      /*
       document.getElementById('sendText').addEventListener('touchend', function(){
         alert("pressed");
       });
+      */
+    },
 
+    focusElement: function(){
+      document.getElementById('TextField').focus();
     },
 
     compileWord: function(decodedLetters) {
@@ -97,6 +161,21 @@ var app = {
       var decodedContent = document.createTextNode(assembledPhrase + decodedText);
       decodeField.appendChild(decodedContent);
       return decodedText;
+    },
+
+    playShort: function() {
+      var path = window.location.pathname;
+      path = path.substr( path, path.length - 10 );
+      path = path + "media/short.mp3";
+      var my_media = new Media(path, function (){
+        console.log("playAudio():Audio Success");
+      },
+        function() {
+        alert("playAudio Error " + err);
+        }
+      );
+        //alert("here");
+      my_media.play();
     },
 
     removeTextNodes: function(decodeField){

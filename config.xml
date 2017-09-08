@@ -8,7 +8,6 @@
         Adaptive Design Associaiton
     </author>
     <content src="index.html" />
-    <plugin name="cordova-plugin-whitelist" spec="1" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -20,6 +19,7 @@
     <preference name="Fullscreen" value="true" />
     <preference name="BackgroundColor" value="0xff0000ff" />
     <preference name="Orientation" value="landscape" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
     <platform name="ios">
         <icon height="180" src="res/ios/icon.png" width="180" />
         <icon height="60" src="res/ios/icon.png" width="60" />
@@ -45,6 +45,8 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-    <engine name="ios" spec="~4.3.1" />
     <engine name="android" spec="~6.1.2" />
+    <engine name="ios" spec="~4.3.1" />
+    <plugin name="cordova-plugin-media" spec="3.0.1" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
 </widget>
