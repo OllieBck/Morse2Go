@@ -23,6 +23,7 @@ var host = "192.168.1.58";
 var ws = new WebSocket('ws://' + host + ':9111');
 
 var counter = 0;
+var beans = 0;
 
 var app = {
     // Application Constructor
@@ -43,24 +44,21 @@ var app = {
 
       var decodedLetters = [];
 
-      document.getElementById('submitText').addEventListener('touchend', function(){
-        var decodedText = app.getMorse(decodedLetters);
-        decodedLetters.push(decodedText);
-        var phraseToSpeak = app.compileWord(decodedLetters);
-        responsiveVoice.speak(phraseToSpeak, "US English Male");
-        ws.send(phraseToSpeak);
-        document.getElementById('TextField').value = "";
-        decodedLetters.splice(0, decodedLetters.length);
-      });
-
       window.addEventListener("keydown", function(event){
-        if (event.defaultPrevented){
-          return;
+        // if (event.defaultPrevented){
+        //   return;
+        // }
+
+        if (event.key == "1"){
+          counter = counter + 1;
+          //event.preventDefault();
         }
 
-        if (event.key == "Enter"){
-          counter = counter + 1;
+        else if (event.key == "3"){
+          beans = beans + 1;
+          //event.preventDefault();
         }
+
       });
 
       if (counter > 0 && counter <= 5) {
@@ -80,13 +78,34 @@ var app = {
         counter = 0;
         }
 
+        if (beans > 0 && beans <= 5){
+          var decodedText = app.getMorse(decodedLetters);
+          decodedLetters.push(decodedText);
+          var phraseToSpeak = app.compileWord(decodedLetters);
+          responsiveVoice.speak(phraseToSpeak, "US English Male");
+          ws.send(phraseToSpeak);
+          document.getElementById('TextField').value = "";
+          decodedLetters.splice(0, decodedLetters.length);
+        }
+
         else {
           counter = 0;
+          beans = 0;
         }
 
       });
 
 /*
+      document.getElementById('submitText').addEventListener('touchend', function(){
+        var decodedText = app.getMorse(decodedLetters);
+        decodedLetters.push(decodedText);
+        var phraseToSpeak = app.compileWord(decodedLetters);
+        responsiveVoice.speak(phraseToSpeak, "US English Male");
+        ws.send(phraseToSpeak);
+        document.getElementById('TextField').value = "";
+        decodedLetters.splice(0, decodedLetters.length);
+      });
+
       window.addEventListener("keydown", function(event){
         if (event.defaultPrevented) {
           return; // Do nothing if the event was already processed
@@ -104,7 +123,6 @@ var app = {
         }
 
       });
-*/
 
       document.getElementById('dot').addEventListener('touchend', function(){
         var morseLetter = document.getElementById('TextField').value = document.getElementById('TextField').value + '.';
@@ -129,7 +147,7 @@ var app = {
         app.getMorse(decodedLetters);
       });
 
-      /*
+
       document.getElementById('sendText').addEventListener('touchend', function(){
         alert("pressed");
       });
