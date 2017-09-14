@@ -49,13 +49,17 @@ var app = {
         //   return;
         // }
 
-        if (event.key == "1"){
-          counter = counter + 1;
+        if (event.key == "Enter"){
           //event.preventDefault();
+          counter = counter + 1;
+
         }
 
-        else if (event.key == "3"){
+        else if (event.key == "Tab"){
+          //event.preventDefault();
           beans = beans + 1;
+        //alert(beans);
+          //alert("hi");
           //event.preventDefault();
         }
 
@@ -78,14 +82,22 @@ var app = {
         counter = 0;
         }
 
-        if (beans > 0 && beans <= 5){
+        else if (beans > 0 && beans <= 5){
+          var decodedText = app.getMorse(decodedLetters);
+          decodedLetters.push(decodedText);
+          document.getElementById('TextField').value = '';
+          app.focusElement();
+        }
+
+        else if (beans > 5 && beans <= 20){
           var decodedText = app.getMorse(decodedLetters);
           decodedLetters.push(decodedText);
           var phraseToSpeak = app.compileWord(decodedLetters);
           responsiveVoice.speak(phraseToSpeak, "US English Male");
-          ws.send(phraseToSpeak);
+          //ws.send(phraseToSpeak);
           document.getElementById('TextField').value = "";
           decodedLetters.splice(0, decodedLetters.length);
+          app.focusElement();
         }
 
         else {
@@ -151,7 +163,7 @@ var app = {
       document.getElementById('sendText').addEventListener('touchend', function(){
         alert("pressed");
       });
-      */
+*/
     },
 
     focusElement: function(){
