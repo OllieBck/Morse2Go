@@ -45,9 +45,9 @@ var app = {
       var decodedLetters = [];
 
       window.addEventListener("keydown", function(event){
-        // if (event.defaultPrevented){
-        //   return;
-        // }
+        if (event.defaultPrevented){
+           return;
+         }
 
         if (event.key == "Enter"){
           //event.preventDefault();
@@ -55,12 +55,9 @@ var app = {
 
         }
 
-        else if (event.key == "Tab"){
-          //event.preventDefault();
+        else if (event.key == " "){
+          event.preventDefault();
           beans = beans + 1;
-        //alert(beans);
-          //alert("hi");
-          //event.preventDefault();
         }
 
       });
@@ -76,16 +73,24 @@ var app = {
         counter = 0;
       }
 
-        else if (counter > 5 && counter < 20){
-        var morseLetter = document.getElementById('TextField').value = document.getElementById('TextField').value + '-';
-        app.getMorse(decodedLetters);
-        counter = 0;
+        else if (counter > 5 && counter <= 20){
+          var morseLetter = document.getElementById('TextField').value =  document.getElementById('TextField').value + '-';
+          app.getMorse(decodedLetters);
+          counter = 0;
+        }
+
+        else if (counter > 20){
+          var morseCode = document.getElementById('TextField').value;
+          document.getElementById('TextField').value = morseCode.substring(0, morseCode.length-1);
+          app.getMorse(decodedLetters);
+          counter = 0;
         }
 
         else if (beans > 0 && beans <= 5){
           var decodedText = app.getMorse(decodedLetters);
           decodedLetters.push(decodedText);
           document.getElementById('TextField').value = '';
+          beans = 0;
           app.focusElement();
         }
 
@@ -97,6 +102,16 @@ var app = {
           //ws.send(phraseToSpeak);
           document.getElementById('TextField').value = "";
           decodedLetters.splice(0, decodedLetters.length);
+          beans = 0;
+          app.focusElement();
+        }
+
+        else if (beans > 20){
+          var decodedText = app.getMorse(decodedLetters);
+          decodedLetters.push(decodedText);
+          decodedLetters.splice(-2);
+          app.getMorse(decodedLetters);
+          beans = 0;
           app.focusElement();
         }
 
@@ -106,6 +121,59 @@ var app = {
         }
 
       });
+    },
+
+    focusElement: function(){
+      document.getElementById('TextField').focus();
+    },
+
+    compileWord: function(decodedLetters) {
+      var assembledPhrase = decodedLetters.join("");
+      //console.log(assembledPhrase);
+      return assembledPhrase;
+    },
+
+    deleteChar: function() {
+      var morseCode = document.getElementById('TextField').value;
+      document.getElementById('TextField').value = morseCode.substring(0, morseCode.length-1);
+      app.getMorse();
+    },
+
+    getMorse: function(decodedLetters) {
+      var morseCode = document.getElementById('TextField').value;
+      var decodeField = document.getElementById('decode');
+      app.removeTextNodes(decodeField);
+      var decodedText = morjs.decode(morseCode, {mode: 'simple'});
+      var assembledPhrase = decodedLetters.join("");
+      var decodedContent = document.createTextNode(assembledPhrase + decodedText);
+      decodeField.appendChild(decodedContent);
+      return decodedText;
+    },
+
+    playShort: function() {
+      var path = window.location.pathname;
+      path = path.substr( path, path.length - 10 );
+      path = path + "media/short.mp3";
+      var my_media = new Media(path, function (){
+        console.log("playAudio():Audio Success");
+      },
+        function() {
+        alert("playAudio Error " + err);
+        }
+      );
+        //alert("here");
+      my_media.play();
+    },
+
+    removeTextNodes: function(decodeField){
+      var nodesToRemove = decodeField.childNodes;
+      for (var i = 0; i < nodesToRemove.length; i++){
+          decodeField.removeChild(nodesToRemove[i]);
+      }
+    }
+};
+
+app.initialize();
 
 /*
       document.getElementById('submitText').addEventListener('touchend', function(){
@@ -164,56 +232,3 @@ var app = {
         alert("pressed");
       });
 */
-    },
-
-    focusElement: function(){
-      document.getElementById('TextField').focus();
-    },
-
-    compileWord: function(decodedLetters) {
-      var assembledPhrase = decodedLetters.join("");
-      //console.log(assembledPhrase);
-      return assembledPhrase;
-    },
-
-    deleteChar: function() {
-      var morseCode = document.getElementById('TextField').value;
-      document.getElementById('TextField').value = morseCode.substring(0, morseCode.length-1);
-      app.getMorse();
-    },
-
-    getMorse: function(decodedLetters) {
-      var morseCode = document.getElementById('TextField').value;
-      var decodeField = document.getElementById('decode');
-      app.removeTextNodes(decodeField);
-      var decodedText = morjs.decode(morseCode, {mode: 'simple'});
-      var assembledPhrase = decodedLetters.join("");
-      var decodedContent = document.createTextNode(assembledPhrase + decodedText);
-      decodeField.appendChild(decodedContent);
-      return decodedText;
-    },
-
-    playShort: function() {
-      var path = window.location.pathname;
-      path = path.substr( path, path.length - 10 );
-      path = path + "media/short.mp3";
-      var my_media = new Media(path, function (){
-        console.log("playAudio():Audio Success");
-      },
-        function() {
-        alert("playAudio Error " + err);
-        }
-      );
-        //alert("here");
-      my_media.play();
-    },
-
-    removeTextNodes: function(decodeField){
-      var nodesToRemove = decodeField.childNodes;
-      for (var i = 0; i < nodesToRemove.length; i++){
-          decodeField.removeChild(nodesToRemove[i]);
-      }
-    }
-};
-
-app.initialize();
