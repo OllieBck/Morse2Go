@@ -22,7 +22,7 @@
 
 //var host = "192.168.1.58";
 //var ws = new WebSocket('ws://' + host + ':9111');
-
+var heldDown = false;
 var counter = 0; // used to count morse short and longs and super-longs (for deleting morse character)
 var beans = 0; // used to count enter features of press -- short (add letter), long (read word), super-long (delete letter)
 
@@ -61,7 +61,8 @@ var app = {
           beans = beans + 1;
         }
 
-        if (counter > 0 && counter <= 5) {
+        if (counter > 0 && counter <= 5 && heldDown == false) {
+          heldDown == true;
           app.playShort();
         }
 
@@ -78,12 +79,14 @@ var app = {
         var morseLetter = document.getElementById('TextField').value = document.getElementById('TextField').value + '.';
         app.getMorse(decodedLetters);
         counter = 0;
+        heldDown == false;
       }
 
         else if (counter > 5 && counter <= 20){
           var morseLetter = document.getElementById('TextField').value =  document.getElementById('TextField').value + '-';
           app.getMorse(decodedLetters);
           counter = 0;
+          heldDown == false;
         }
 
         else if (counter > 20){
@@ -91,6 +94,7 @@ var app = {
           document.getElementById('TextField').value = morseCode.substring(0, morseCode.length-1);
           app.getMorse(decodedLetters);
           counter = 0;
+          heldDown == false;
         }
 
         else if (beans > 0 && beans <= 5){
