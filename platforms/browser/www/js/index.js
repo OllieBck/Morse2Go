@@ -16,14 +16,15 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 // var decodeField;
 // var decodedContent;
 
-var host = "192.168.1.58";
-var ws = new WebSocket('ws://' + host + ':9111');
+//var host = "192.168.1.58";
+//var ws = new WebSocket('ws://' + host + ':9111');
 
-var counter = 0;
-var beans = 0;
+var counter = 0; // used to count morse short and longs and super-longs (for deleting morse character)
+var beans = 0; // used to count enter features of press -- short (add letter), long (read word), super-long (delete letter)
 
 var app = {
     // Application Constructor
@@ -40,31 +41,35 @@ var app = {
     },
 
     morse2Go: function() {
-      app.focusElement();
+      app.focusElement(); // force focus to input box
 
-      var decodedLetters = [];
+      app.playShort();
 
-      window.addEventListener("keydown", function(event){
+      var decodedLetters = []; // array for holding morse inputs
+
+      window.addEventListener("keydown", function(event){ // look for key event
         if (event.defaultPrevented){
            return;
          }
 
-        if (event.key == "Enter"){
+        if (event.key == "Enter"){ // if keydown is an Enter key, add to "counter" variable
           //event.preventDefault();
           counter = counter + 1;
 
         }
 
-        else if (event.key == " "){
+        else if (event.key == " "){ // if keydown is a Space key, add to "beans" variable
           event.preventDefault();
           beans = beans + 1;
         }
 
       });
 
+/*
       if (counter > 0 && counter <= 5) {
         app.playShort();
       }
+*/
 
       window.addEventListener("keyup", function(event){
         if (counter > 0 && counter <= 5){
