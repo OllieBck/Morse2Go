@@ -43,8 +43,6 @@ var app = {
     morse2Go: function() {
       app.focusElement(); // force focus to input box
 
-      app.playShort();
-
       var decodedLetters = []; // array for holding morse inputs
 
       window.addEventListener("keydown", function(event){ // look for key event
@@ -61,6 +59,10 @@ var app = {
         else if (event.key == " "){ // if keydown is a Space key, add to "beans" variable
           event.preventDefault();
           beans = beans + 1;
+        }
+
+        if (counter > 0 && counter <= 5) {
+          app.playShort();
         }
 
       });
