@@ -64,7 +64,7 @@ var app = {
 
         if (counter == 1) {
           heldDown == true;
-          app.playShort();
+          //app.playShort();
         }
 
       });
