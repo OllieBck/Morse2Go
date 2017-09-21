@@ -22,6 +22,7 @@
 
 //var host = "192.168.1.58";
 //var ws = new WebSocket('ws://' + host + ':9111');
+
 var heldDown = false;
 var counter = 0; // used to count morse short and longs and super-longs (for deleting morse character)
 var beans = 0; // used to count enter features of press -- short (add letter), long (read word), super-long (delete letter)
@@ -61,7 +62,7 @@ var app = {
           beans = beans + 1;
         }
 
-        if (counter > 0 && counter <= 5 && heldDown == false) {
+        if (counter == 1) {
           heldDown == true;
           app.playShort();
         }
