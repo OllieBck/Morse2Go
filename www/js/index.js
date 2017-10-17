@@ -62,9 +62,20 @@ var app = {
           beans = beans + 1;
         }
 
-        if (counter == 1) {
-          heldDown == true;
-          //app.playShort();
+        if (counter == 6) {
+          app.playSound("media/shortHarp.mp3");
+        }
+
+        if(counter == 21)
+          app.playSound("media/longHarp.mp3");
+        }
+
+        if (beans == 6) {
+          app.playSound("media/shortSpiel.mp3");
+        }
+
+        if (beans == 21){
+          app.playSound("media/longSpiel.mp3")
         }
 
       });
@@ -156,7 +167,7 @@ var app = {
       return decodedText;
     },
 
-    playShort: function() {
+    playSound: function(destination) {
       var path = window.location.pathname;
       path = path.substr( path, path.length - 10 );
       path = path + "media/short.mp3";
