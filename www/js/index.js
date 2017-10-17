@@ -65,7 +65,7 @@ var app = {
           app.playSound("media/shortHarp.mp3");
         }
 
-        else if(counter == 21)
+        else if(counter == 21) {
           app.playSound("media/longHarp.mp3");
         }
 
