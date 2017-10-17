@@ -54,30 +54,29 @@ var app = {
         if (event.key == "Enter"){ // if keydown is an Enter key, add to "counter" variable
           event.preventDefault();
           counter = counter + 1;
-
-          if (counter == 6) {
-            app.playSound("media/shortHarp.mp3");
-          }
-
-          if(counter == 21)
-            app.playSound("media/longHarp.mp3");
-          }
-
         }
 
         else if (event.key == " "){ // if keydown is a Space key, add to "beans" variable
           event.preventDefault();
           beans = beans + 1;
-
-          if (beans == 6) {
-            app.playSound("media/shortSpiel.mp3");
-          }
-
-          if (beans == 21){
-            app.playSound("media/longSpiel.mp3")
-          }
         }
-        
+
+        if (counter == 6) {
+          app.playSound("media/shortHarp.mp3");
+        }
+
+        else if(counter == 21)
+          app.playSound("media/longHarp.mp3");
+        }
+
+        if (beans == 6) {
+          app.playSound("media/shortSpiel.mp3");
+        }
+
+        else if (beans == 21){
+          app.playSound("media/longSpiel.mp3")
+        }
+
       });
 
       window.addEventListener("keyup", function(event){
@@ -86,6 +85,7 @@ var app = {
         app.getMorse(decodedLetters);
         counter = 0;
         heldDown == false;
+        app.focusElement();
       }
 
         else if (counter > 5 && counter <= 20){
@@ -93,6 +93,7 @@ var app = {
           app.getMorse(decodedLetters);
           counter = 0;
           heldDown == false;
+          app.focusElement();
         }
 
         else if (counter > 20){
@@ -101,6 +102,7 @@ var app = {
           app.getMorse(decodedLetters);
           counter = 0;
           heldDown == false;
+          app.focusElement();
         }
 
         else if (beans > 0 && beans <= 5){
