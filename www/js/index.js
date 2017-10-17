@@ -52,32 +52,32 @@ var app = {
          }
 
         if (event.key == "Enter"){ // if keydown is an Enter key, add to "counter" variable
-          //event.preventDefault();
+          event.preventDefault();
           counter = counter + 1;
+
+          if (counter == 6) {
+            app.playSound("media/shortHarp.mp3");
+          }
+
+          if(counter == 21)
+            app.playSound("media/longHarp.mp3");
+          }
 
         }
 
         else if (event.key == " "){ // if keydown is a Space key, add to "beans" variable
           event.preventDefault();
           beans = beans + 1;
-        }
 
-        if (counter == 6) {
-          app.playSound("media/shortHarp.mp3");
-        }
+          if (beans == 6) {
+            app.playSound("media/shortSpiel.mp3");
+          }
 
-        if(counter == 21)
-          app.playSound("media/longHarp.mp3");
+          if (beans == 21){
+            app.playSound("media/longSpiel.mp3")
+          }
         }
-
-        if (beans == 6) {
-          app.playSound("media/shortSpiel.mp3");
-        }
-
-        if (beans == 21){
-          app.playSound("media/longSpiel.mp3")
-        }
-
+        
       });
 
       window.addEventListener("keyup", function(event){
