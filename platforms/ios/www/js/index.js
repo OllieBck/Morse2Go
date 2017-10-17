@@ -23,6 +23,7 @@
 //var host = "192.168.1.58";
 //var ws = new WebSocket('ws://' + host + ':9111');
 
+var heldDown = false;
 var counter = 0; // used to count morse short and longs and super-longs (for deleting morse character)
 var beans = 0; // used to count enter features of press -- short (add letter), long (read word), super-long (delete letter)
 
@@ -61,29 +62,26 @@ var app = {
           beans = beans + 1;
         }
 
-        if (counter > 0 && counter <= 5) {
-          app.playShort();
+        if (counter == 1) {
+          heldDown == true;
+          //app.playShort();
         }
 
       });
-
-/*
-      if (counter > 0 && counter <= 5) {
-        app.playShort();
-      }
-*/
 
       window.addEventListener("keyup", function(event){
         if (counter > 0 && counter <= 5){
         var morseLetter = document.getElementById('TextField').value = document.getElementById('TextField').value + '.';
         app.getMorse(decodedLetters);
         counter = 0;
+        heldDown == false;
       }
 
         else if (counter > 5 && counter <= 20){
           var morseLetter = document.getElementById('TextField').value =  document.getElementById('TextField').value + '-';
           app.getMorse(decodedLetters);
           counter = 0;
+          heldDown == false;
         }
 
         else if (counter > 20){
@@ -91,6 +89,7 @@ var app = {
           document.getElementById('TextField').value = morseCode.substring(0, morseCode.length-1);
           app.getMorse(decodedLetters);
           counter = 0;
+          heldDown == false;
         }
 
         else if (beans > 0 && beans <= 5){
@@ -181,61 +180,3 @@ var app = {
 };
 
 app.initialize();
-
-/*
-      document.getElementById('submitText').addEventListener('touchend', function(){
-        var decodedText = app.getMorse(decodedLetters);
-        decodedLetters.push(decodedText);
-        var phraseToSpeak = app.compileWord(decodedLetters);
-        responsiveVoice.speak(phraseToSpeak, "US English Male");
-        ws.send(phraseToSpeak);
-        document.getElementById('TextField').value = "";
-        decodedLetters.splice(0, decodedLetters.length);
-      });
-
-      window.addEventListener("keydown", function(event){
-        if (event.defaultPrevented) {
-          return; // Do nothing if the event was already processed
-        }
-
-        switch (event.key) {
-          case "Enter":
-            counter = counter + 1;
-            if (counter > 0 || counter < 3){
-            var morseLetter = document.getElementById('TextField').value = document.getElementById('TextField').value + '.';
-            app.getMorse(decodedLetters);
-            counter = 0;
-          }
-            break;
-        }
-
-      });
-
-      document.getElementById('dot').addEventListener('touchend', function(){
-        var morseLetter = document.getElementById('TextField').value = document.getElementById('TextField').value + '.';
-        app.playShort();
-        app.getMorse(decodedLetters);
-      });
-
-      document.getElementById('dash').addEventListener('touchend', function(){
-        var morseLetter = document.getElementById('TextField').value = document.getElementById('TextField').value + '-';
-        app.getMorse(decodedLetters);
-      });
-
-      document.getElementById('space').addEventListener('touchend', function(){
-        var decodedText = app.getMorse(decodedLetters);
-        decodedLetters.push(decodedText);
-        document.getElementById('TextField').value = '';
-      });
-
-      document.getElementById('deleteLetter').addEventListener('touchend', function(){
-        var morseCode = document.getElementById('TextField').value;
-        document.getElementById('TextField').value = morseCode.substring(0, morseCode.length-1);
-        app.getMorse(decodedLetters);
-      });
-
-
-      document.getElementById('sendText').addEventListener('touchend', function(){
-        alert("pressed");
-      });
-*/
