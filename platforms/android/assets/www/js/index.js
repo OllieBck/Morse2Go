@@ -172,7 +172,7 @@ var app = {
     playSound: function(destination) {
       var path = window.location.pathname;
       path = path.substr( path, path.length - 10 );
-      path = path + "media/short.mp3";
+      path = path + destination;
       var my_media = new Media(path, function (){
         console.log("playAudio():Audio Success");
       },
